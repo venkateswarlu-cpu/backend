@@ -1,14 +1,11 @@
 import express from "express";
-import {
-  addExpense,
-  getExpenses,
-  deleteExpense,
-} from "../controllers/expenseController.js";
+import { getExpenses, addExpense, deleteExpense } from "../controllers/expenseController.js";
+import { protect } from "../middleware/authMiddleware.js";
 
 const router = express.Router();
 
-router.post("/add", addExpense);
-router.get("/", getExpenses);
-router.delete("/:id", deleteExpense);
+router.get("/", protect, getExpenses);
+router.post("/add", protect, addExpense);
+router.delete("/:id", protect, deleteExpense);
 
 export default router;

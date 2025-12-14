@@ -1,13 +1,11 @@
 import mongoose from "mongoose";
 
-const expenseSchema = new mongoose.Schema(
-  {
-    title: String,
-    amount: Number,
-    category: String,
-    date: Date,
-  },
-  { timestamps: true }
-);
+const expenseSchema = new mongoose.Schema({
+  user: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+  title: { type: String, required: true },
+  amount: { type: Number, required: true },
+  category: { type: String, required: true },
+  date: { type: Date, required: true },
+});
 
 export default mongoose.model("Expense", expenseSchema);
